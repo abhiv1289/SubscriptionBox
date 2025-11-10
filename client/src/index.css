@@ -1,0 +1,95 @@
+:root {
+  --accent: #2563eb;
+  --danger: #ef4444;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Inter, system-ui, Arial;
+  margin: 0;
+  background: #fafafa;
+  color: #111;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+.brand a {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 18px;
+}
+.header nav a {
+  margin-right: 12px;
+  text-decoration: none;
+  color: #333;
+}
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 12px;
+  border-radius: 8px;
+  width: 240px;
+}
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.auth-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.auth-form input {
+  padding: 6px 8px;
+}
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn.danger {
+  background: var(--danger);
+}
+.user-name {
+  margin-right: 8px;
+  font-weight: 600;
+}
+.sub-item {
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+.admin-form input {
+  display: block;
+  margin: 6px 0;
+  padding: 8px;
+  width: 100%;
+  max-width: 420px;
+}
+.link {
+  color: var(--accent);
+  text-decoration: none;
+}
