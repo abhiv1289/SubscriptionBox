@@ -12,18 +12,35 @@ export default function App() {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user") || "null")
   );
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.token) API.setToken(user.token);
+
+    // simulate initialization delay (e.g., connecting to server)
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500); // 1.5 seconds
+
+    return () => clearTimeout(timer);
   }, [user]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     API.setToken(null);
     setUser(null);
-    // optional: force reload to reset UI completely
-    // window.location.reload();
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-900 text-white flex-col">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 mb-4"></div>
+        <p className="text-xl font-semibold text-gray-300">
+          Wait a minute... while the render is turning on 🚀
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div>
