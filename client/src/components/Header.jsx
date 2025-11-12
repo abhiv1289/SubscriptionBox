@@ -6,9 +6,11 @@ import toast from "react-hot-toast";
 export default function Header({ user, setUser, onLogout }) {
   const [showAuth, setShowAuth] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false); // 🔹 new loader state
 
   const login = async (e) => {
     e.preventDefault();
+    setLoading(true); // 🔹 start loading
     try {
       const res = await API.post("/auth/login", {
         email: form.email,
@@ -21,11 +23,14 @@ export default function Header({ user, setUser, onLogout }) {
       toast.success("Logged in");
     } catch (err) {
       toast.error(err?.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false); // 🔹 stop loading
     }
   };
 
   const register = async (e) => {
     e.preventDefault();
+    setLoading(true); // 🔹 start loading
     try {
       const res = await API.post("/auth/register", {
         name: form.name,
@@ -39,6 +44,8 @@ export default function Header({ user, setUser, onLogout }) {
       toast.success("Registered");
     } catch (err) {
       toast.error(err?.response?.data?.message || "Register failed");
+    } finally {
+      setLoading(false); // 🔹 stop loading
     }
   };
 
@@ -86,14 +93,22 @@ export default function Header({ user, setUser, onLogout }) {
                     setForm({ ...form, password: e.target.value })
                   }
                 />
-                <div style={{ display: "flex", gap: 8 }}>
-                  <button className="btn" type="submit">
-                    Login
-                  </button>
-                  <button className="btn" type="button" onClick={register}>
-                    Register
-                  </button>
-                </div>
+
+                {loading ? (
+                  <div className="loader">
+                    <div className="spinner"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button className="btn" type="submit">
+                      Login
+                    </button>
+                    <button className="btn" type="button" onClick={register}>
+                      Register
+                    </button>
+                  </div>
+                )}
               </form>
             )}
           </>
